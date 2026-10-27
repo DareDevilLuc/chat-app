@@ -18,7 +18,5 @@ app.UseCors("client");
 
 app.UseHttpsRedirection();
 
-app.MapGet("api/ping", () => new { message = "pong" });
-
 app.Run();
 
