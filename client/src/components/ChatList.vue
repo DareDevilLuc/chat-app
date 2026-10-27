@@ -13,6 +13,7 @@ const { chats } = useChats()
     <ChatListItem
         v-for="chat in chats"
         :key = "chat.id"
+        :id = "chat.id"
         :name="chat.name"
         />
   </div>
