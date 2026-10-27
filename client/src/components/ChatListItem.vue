@@ -1,12 +1,17 @@
 <script setup lang="ts">
 
+defineProps<{
+  name: string
+}>()
+
 </script>
 
 <template>
 
+  <div class="p-0">
+    <div class="border-bottom border-2 border-danger p-3 d-flex justify-content-center">
+      {{ name }}
+    </div>
+  </div>
+
 </template>
-
-<style scoped>
-
-</style>
-

@@ -8,7 +8,7 @@ import ChatWindow from '@/components/ChatWindow.vue';
 
   <div class="container-fluid">
     <div class="row min-vh-100">
-      <div class="col-3 bg-dark text-white">
+      <div class="col-3 bg-dark text-white p-0">
         <ChatList/>
       </div>
 
