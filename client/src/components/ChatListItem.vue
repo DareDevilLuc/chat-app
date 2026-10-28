@@ -14,7 +14,7 @@ const emit = defineEmits<{
 
 <template>
 
-  <div class="p-0" @click="emit('select', id)">
+  <div class="p-0" :class="id === selectedId ? 'bg-primary' : ''" @click="emit('select', id)">
     <div class="border-bottom border-2 border-danger p-3 d-flex justify-content-center">
       {{ name }}
     </div>
