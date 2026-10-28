@@ -4,6 +4,13 @@ import ChatListItem from './ChatListItem.vue';
 
 const { chats } = useChats()
 
+defineProps<{
+  selectedId: number
+}>()
+
+const emits = defineEmits<{
+  select: [id: number]
+}>()
 </script>
 
 <template>
@@ -15,6 +22,8 @@ const { chats } = useChats()
         :key = "chat.id"
         :id = "chat.id"
         :name="chat.name"
+        :selectedId = "selectedId"
+        @select="emits('select', $event)"
         />
   </div>
 

@@ -3,13 +3,18 @@
 defineProps<{
   id: number,
   name: string
+  selectedId: number
+}>()
+
+const emit = defineEmits<{
+  select: [id: number]
 }>()
 
 </script>
 
 <template>
 
-  <div class="p-0">
+  <div class="p-0" @click="emit('select', id)">
     <div class="border-bottom border-2 border-danger p-3 d-flex justify-content-center">
       {{ name }}
     </div>
