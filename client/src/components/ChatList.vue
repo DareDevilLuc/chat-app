@@ -9,7 +9,7 @@ defineProps<{
 }>()
 
 const emits = defineEmits<{
-  select: [id: number]
+  select: [{id: number, name: string}]
 }>()
 </script>
 

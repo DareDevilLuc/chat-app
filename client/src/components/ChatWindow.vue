@@ -2,13 +2,15 @@
 
 defineProps<{
   selectedID: number
+  name: string
 }>()
 
 </script>
 
 <template>
+  <!-- header -->
   <div>
-    You chose id: {{ selectedID }}
+    {{ name }}
   </div>
 </template>
 
