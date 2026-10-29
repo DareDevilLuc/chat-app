@@ -10,11 +10,11 @@ defineProps<{
 <template>
   <div class="h-100 d-flex flex-column">
     <!-- header -->
-    <div class="p-4 border-bottom bg-secondary" >
-      <span class="avatar">
-        <img class="avatar-img" src="https://github.com/mdo.png" alt="mdo">
+    <div class="d-flex p-4 border-bottom bg-secondary lh-1 align-items-center" >
+      <span class="align-items-center me-2">
+        <img class="rounded-circle" src="https://github.com/mdo.png" alt="mdo" width="40" height="40">
       </span>
-      <span class="text-white"> {{ name }} </span>
+      <span class="text-white fs-3"> {{ name }} </span>
     </div>
 
     <div class="flex-grow-1 overflow-auto p-3">
