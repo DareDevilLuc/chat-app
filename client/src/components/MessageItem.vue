@@ -2,16 +2,15 @@
 import type { Message } from '@/types/message.ts'
 
 defineProps<{
-  message: Message
+  message: Message,
 }>()
 
 </script>
 
 <template>
-
+  <div>
+    From: {{ message.senderName }} | To: {{ message.chatId }}
+  </div>
 </template>
 
-<style scoped>
-
-</style>
-
+<style scoped></style>
