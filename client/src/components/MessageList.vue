@@ -9,7 +9,8 @@ const props = defineProps<{
 
 <template>
   <div class="d-flex flex-column">
-    <MessageItem v-for="message in messages" :key="message.id" :message="message"/>
+    <MessageItem v-for="message in messages" :key="message.id" :message="message"
+    :isOwn="message.isOwn"/>
   </div>
 </template>
 

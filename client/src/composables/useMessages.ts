@@ -45,7 +45,7 @@ export function useMessages(chatId: Ref<number>) {
       id: 5,
       chatId: 1,
       senderId: 3,
-      senderName: "Alex",
+      senderName: "Bryan",
       text: "Don't forget to bring the documents tomorrow.",
       createdAt: "2026-10-30T18:40:00.000Z",
       isOwn: false
