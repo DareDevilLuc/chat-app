@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column gap-3">
     <MessageItem v-for="message in messages" :key="message.id" :message="message"
     :isOwn="message.isOwn"/>
   </div>

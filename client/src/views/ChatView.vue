@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, } from 'vue';
 import ChatList from '@/components/ChatList.vue';
 import ChatWindow from '@/components/ChatWindow.vue';
 
