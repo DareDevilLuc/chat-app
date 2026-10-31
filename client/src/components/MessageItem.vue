@@ -3,17 +3,16 @@ import type { Message } from '@/types/message.ts'
 
 defineProps<{
   message: Message,
-  isOwn: boolean
 }>()
 
 </script>
 
 <template>
-  <div class="d-flex flex-column" :class="{ 'align-items-start': !isOwn, 'align-items-end' : isOwn  }">
-    <div>
+  <div class="d-flex flex-column" :class="{ 'align-items-start': !message.isOwn, 'align-items-end' : message.isOwn  }">
+    <div class="pl-2">
       {{ message.senderName }}
     </div>
-    <div :class="isOwn ? 'your-message' : 'their-message'">
+    <div :class="message.isOwn ? 'your-message' : 'their-message'">
       {{ message.text }}
     </div>
   </div>
@@ -24,14 +23,14 @@ defineProps<{
   background-color: lightgray;
   color: black;
   padding: 0.5rem;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 .your-message {
   background-color: #2a54f8;
   color: white;
   padding: 0.5rem;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 </style>
