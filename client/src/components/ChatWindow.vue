@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, toRef, watch, } from 'vue';
+import { toRef, watch, } from 'vue';
 import MessageInput from './MessageInput.vue';
 import MessageList from './MessageList.vue';
-import { useMessages } from '@/composables/useMessages';
+import { useMessages, addMessage } from '@/composables/useMessages';
 
 
 const props = defineProps<{
@@ -12,7 +12,21 @@ const props = defineProps<{
 
 const { messages } = useMessages(toRef(props, 'selectedID'))
 
-watch(messages, (newMessages) => console.log(newMessages), { deep: true, immediate: true })
+function sendNewMessage(text: string) {
+  const newMessage = {
+    id: 11,
+    chatId: props.selectedID,
+    senderId: 1,
+    senderName: "You",
+    text: text,
+    createdAt: "2026-11-01 10:33",
+    isOwn: true
+  }
+
+  addMessage(newMessage)
+}
+
+
 
 </script>
 
@@ -29,7 +43,7 @@ watch(messages, (newMessages) => console.log(newMessages), { deep: true, immedia
     </div>
 
     <div class="p-4 border-top bg-secondary">
-      <MessageInput />
+      <MessageInput @send="sendNewMessage($event)"/>
     </div>
   </div>
 </template>
