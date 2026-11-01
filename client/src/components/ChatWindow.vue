@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRef, watch, } from 'vue';
+import { nextTick, ref, toRef, watch, } from 'vue';
 import MessageInput from './MessageInput.vue';
 import MessageList from './MessageList.vue';
 import { useMessages, addMessage } from '@/composables/useMessages';
@@ -13,6 +13,8 @@ const props = defineProps<{
 const { messages } = useMessages(toRef(props, 'selectedID'))
 
 function sendNewMessage(text: string) {
+  if(text === '') return
+
   const newMessage = {
     id: 11,
     chatId: props.selectedID,
@@ -26,6 +28,17 @@ function sendNewMessage(text: string) {
   addMessage(newMessage)
 }
 
+const messagesContainer = ref<HTMLElement | null>(null)
+
+async function scrollToBottom() {
+  await nextTick()
+
+  if(messagesContainer.value) {
+  messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+  }
+}
+
+watch(() => messages.value.length, () => { scrollToBottom() },  { immediate: true })
 
 
 </script>
@@ -38,7 +51,7 @@ function sendNewMessage(text: string) {
       <span class="text-white fs-3"> {{ props.name }} </span>
     </div>
 
-    <div class="flex-grow-1 overflow-auto p-3">
+    <div class="flex-grow-1 overflow-auto p-3" ref="messagesContainer">
       <MessageList :messages="messages" />
     </div>
 

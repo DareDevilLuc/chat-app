@@ -94,6 +94,33 @@ messagesAll.value = [
     createdAt: "2026-10-30T18:52:00.000Z",
     isOwn: true
   },
+  {
+    id: 10,
+    chatId: 1,
+    senderId: 1,
+    senderName: "You",
+    text: "Will do. See you later!",
+    createdAt: "2026-10-30T18:52:00.000Z",
+    isOwn: true
+  },
+  {
+    id: 10,
+    chatId: 1,
+    senderId: 1,
+    senderName: "You",
+    text: "Will do. See you later!",
+    createdAt: "2026-10-30T18:52:00.000Z",
+    isOwn: true
+  },
+  {
+    id: 10,
+    chatId: 1,
+    senderId: 1,
+    senderName: "You",
+    text: "Will do. See you later!",
+    createdAt: "2026-10-30T18:52:00.000Z",
+    isOwn: true
+  },
 ]
 
 

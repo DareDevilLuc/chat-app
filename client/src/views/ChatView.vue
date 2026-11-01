@@ -18,12 +18,12 @@ function handleSelect(event: {id: number, name: string}){
 <template>
 
   <div class="container-fluid">
-    <div class="row min-vh-100">
-      <div class="col-3 bg-dark text-white p-0">
+    <div class="row vh-100">
+      <div class="col-3 bg-dark text-white p-0 ">
         <ChatList :selectedId="selectedId" @select="handleSelect"/>
       </div>
 
-      <div class="col-9 p-0">
+      <div class="col-9 p-0 mh-100">
         <ChatWindow
         v-if="selectedId != 0"
         :selectedID="selectedId"
