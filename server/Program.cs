@@ -1,7 +1,13 @@
 using server.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
+using SignalRChatMVC.Hubs;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+builder.Services.AddSignalR();
 
 builder.Services.AddOpenApi();
 builder.Services.AddCors(options => {
@@ -19,7 +25,8 @@ var app = builder.Build();
 
 app.UseCors("client");
 
-app.UseHttpsRedirection();
+
+app.MapControllers();
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
-

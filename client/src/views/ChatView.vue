@@ -8,9 +8,22 @@ const selectedName = ref()
 
 selectedId.value = 0
 
+async function getChat(id : number){
+  const response = await fetch(`http://localhost:5200/api/chat/${id}`)
+
+  if(!response.ok) {
+    throw new Error("Failed to retrieve chat")
+  }
+
+  const data = await response.text()
+
+  console.log(data)
+}
+
 function handleSelect(event: {id: number, name: string}){
   selectedId.value = event.id
   selectedName.value = event.name
+  getChat(event.id)
 }
 
 </script>
