@@ -55,6 +55,10 @@ namespace server.Migrations
                     b.Property<int>("ChatId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("SenderId")
                         .HasColumnType("INTEGER");
 
