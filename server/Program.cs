@@ -1,7 +1,10 @@
 using server.Data;
+using server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using SignalRChatMVC.Hubs;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +23,10 @@ builder.Services.AddCors(options => {
     });
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=chatapp.db"));
+
+builder.Services.AddIdentityCore<User>()
+  .AddRoles<IdentityRole<int>>()
+  .AddEntityFrameworkStores<AppDbContext>();
 
 var app = builder.Build();
 
