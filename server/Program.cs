@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using SignalRChatMVC.Hubs;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,9 +29,36 @@ builder.Services.AddIdentityCore<User>()
   .AddRoles<IdentityRole<int>>()
   .AddEntityFrameworkStores<AppDbContext>();
 
+  builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = "ChatApp",
+            ValidAudience = "ChatApp",
+
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Convert.FromBase64String(
+                    builder.Configuration["Jwt:Key"]!
+                )
+            )
+        };
+    });
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 app.UseCors("client");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.MapControllers();
