@@ -14,14 +14,16 @@ builder.Services.AddControllers();
 builder.Services.AddSignalR();
 
 builder.Services.AddOpenApi();
-builder.Services.AddCors(options => {
-    options.AddPolicy("client", policy => {
-        policy.WithOrigins("http://localhost:5173")
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowCredentials();
-        });
-    });
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("client", policy =>
+  {
+    policy.WithOrigins("http://localhost:5173")
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials();
+  });
+});
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=chatapp.db"));
 
@@ -29,27 +31,27 @@ builder.Services.AddIdentityCore<User>()
   .AddRoles<IdentityRole<int>>()
   .AddEntityFrameworkStores<AppDbContext>();
 
-  builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+builder.Services
+  .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+  .AddJwtBearer(options =>
+  {
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
+      ValidateIssuer = true,
+      ValidateAudience = true,
+      ValidateLifetime = true,
+      ValidateIssuerSigningKey = true,
 
-            ValidIssuer = "ChatApp",
-            ValidAudience = "ChatApp",
+      ValidIssuer = "ChatApp",
+      ValidAudience = "ChatApp",
 
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Convert.FromBase64String(
-                    builder.Configuration["Jwt:Key"]!
-                )
+      IssuerSigningKey = new SymmetricSecurityKey(
+            Convert.FromBase64String(
+                builder.Configuration["Jwt:Key"]!
             )
-        };
-    });
+        )
+    };
+  });
 
 builder.Services.AddAuthorization();
 
