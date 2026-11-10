@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using server.Models;
 using server.Data;
 using Microsoft.AspNetCore.SignalR;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace server.Controllers{
@@ -15,13 +17,19 @@ namespace server.Controllers{
 
     public ChatController(AppDbContext context) { _context = context; }
 
-    [HttpGet("{id}")]
-    public IActionResult GetChat (int id)
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetChats()
     {
-      if(id <= 0)
-        return BadRequest("Invalid Chat ID");
 
-      return Ok($"Chat ID: {id}");
+      var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+
+      var chats = await _context.Chats
+        .Where(c => c.ChatParticipants.Any(cp => cp.UserId == userId))
+        .ToListAsync();
+
+      return Ok( new { chats });
 
     }
   }

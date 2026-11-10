@@ -245,7 +245,7 @@ namespace server.Migrations
                             ChatId = 1,
                             Content = "Don't forget to bring the documents tomorrow.",
                             CreatedAt = new DateTime(2026, 10, 30, 18, 40, 0, 0, DateTimeKind.Utc),
-                            SenderId = 3
+                            SenderId = 2
                         },
                         new
                         {
@@ -358,19 +358,6 @@ namespace server.Migrations
                     b.ToTable("AspNetUsers", (string)null);
 
                     b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "seed-user-1",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "You",
-                            NormalizedUserName = "YOU",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "You"
-                        },
                         new
                         {
                             Id = 2,

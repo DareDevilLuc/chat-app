@@ -5,6 +5,7 @@ import ChatWindow from '@/components/ChatWindow.vue';
 
 const selectedId = ref()
 const selectedName = ref()
+const token = localStorage.getItem('token')
 
 selectedId.value = 0
 

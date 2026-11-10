@@ -42,13 +42,19 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<int>, int>
 
         // USERS
     modelBuilder.Entity<User>().HasData(
-        new User { Id = 1, Name = "You", UserName = "You", NormalizedUserName = "YOU",
-        ConcurrencyStamp = "seed-user-1"},
         new User { Id = 2, Name = "Bryan", UserName = "Bryan", NormalizedUserName = "BRYAN", 
         ConcurrencyStamp = "seed-user-2"},
         new User { Id = 3, Name = "Alex", UserName = "Alex", NormalizedUserName = "ALEX" , 
         ConcurrencyStamp = "seed-user-3"}
     );
+
+        var user = new User
+    {
+        Name = "Bryan",
+        UserName = "Bryan",
+        Email = "bryan@example.com"
+    };
+
 
     // CHATS
     modelBuilder.Entity<Chat>().HasData(
@@ -96,7 +102,7 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         Id = 5,
         ChatId = 1,
-        SenderId = 3,
+        SenderId = 2,
         Content = "Don't forget to bring the documents tomorrow.",
         CreatedAt = new DateTime(2026, 10, 30, 18, 40, 0, DateTimeKind.Utc)
     },
