@@ -2,7 +2,7 @@
 import { nextTick, onMounted, ref, toRef, watch, } from 'vue';
 import MessageInput from './MessageInput.vue';
 import MessageList from './MessageList.vue';
-import { getMessages, addMessage } from '@/composables/useMessages';
+import { getMessages } from '@/composables/useMessages';
 import type { Message } from '@/types/message';
 
 
@@ -17,20 +17,38 @@ onMounted(async () => {
   messages.value = await getMessages(props.selectedID)
 })
 
-function sendNewMessage(text: string) {
+async function sendNewMessage(text: string) {
   if(text === '') return
 
   const newMessage = {
-    id: 11,
     chatId: props.selectedID,
-    senderId: 1,
-    senderName: "You",
-    text: text,
-    createdAt: "2026-11-01 10:33",
-    isOwn: true
+    content: text
   }
 
-  addMessage(newMessage)
+  try {
+   const response = await fetch('http://localhost:5200/api/message', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    },
+    body: JSON.stringify(newMessage)
+   })
+
+   if(!response.ok){
+    throw new Error('Error sending message')
+   }
+
+  const savedMessage = await response.json();
+
+  messages.value.push(savedMessage);
+
+  }
+  catch{
+    throw new Error('Error sending message')
+  }
+
+
 }
 
 const messagesContainer = ref<HTMLElement | null>(null)

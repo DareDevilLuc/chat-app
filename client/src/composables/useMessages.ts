@@ -1,13 +1,6 @@
 import type { Message } from '@/types/message'
 import { computed, ref, type Ref } from 'vue'
 
-const messagesAll = ref<Message[]>([])
-
-
-export function addMessage(newMessage: Message) {
-  messagesAll.value.push(newMessage)
-}
-
 export async function getMessages(chatId : number) {
   const token = localStorage.getItem('token')
 
@@ -30,3 +23,4 @@ export async function getMessages(chatId : number) {
   }
 
 }
+

@@ -42,4 +42,34 @@ public class MessageController : ControllerBase {
 
     return Ok(messages);
   }
+
+  [Authorize]
+  [HttpPost]
+  public async Task<IActionResult> SendMessage(CreateMessageDto dto){
+    var senderId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+    var user = await _context.Users.FindAsync(senderId);
+
+    if(user == null) return Unauthorized();
+
+    var message = new Message {
+      ChatId = dto.ChatId,
+      SenderId = senderId,
+      Content = dto.content,
+      CreatedAt = DateTime.UtcNow
+    };
+
+    _context.Messages.Add(message);
+    await _context.SaveChangesAsync();
+
+    return Ok(new MessageDto {
+        Id = message.Id,
+        ChatId = message.ChatId,
+        SenderId = message.SenderId,
+        SenderName = user.Name,
+        Text = message.Content,
+        CreatedAt = message.CreatedAt,
+        IsOwn = message.SenderId == user.Id
+        });
+  }
 }
