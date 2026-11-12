@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { nextTick, ref, toRef, watch, } from 'vue';
+import { nextTick, onMounted, ref, toRef, watch, } from 'vue';
 import MessageInput from './MessageInput.vue';
 import MessageList from './MessageList.vue';
-import { useMessages, addMessage } from '@/composables/useMessages';
+import { getMessages, addMessage } from '@/composables/useMessages';
+import type { Message } from '@/types/message';
 
 
 const props = defineProps<{
@@ -10,7 +11,11 @@ const props = defineProps<{
   name: string
 }>()
 
-const { messages } = useMessages(toRef(props, 'selectedID'))
+const messages = ref<Message[]>([])
+
+onMounted(async () => {
+  messages.value = await getMessages(props.selectedID)
+})
 
 function sendNewMessage(text: string) {
   if(text === '') return

@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { useChats } from '@/composables/useChats';
+import { getChats } from '@/composables/useChats';
 import ChatListItem from './ChatListItem.vue';
+import { ref, onMounted } from 'vue';
+import type { Chat } from '@/types/chat';
 
-const { chats } = useChats()
+const chats = ref<Chat[]>([])
+
+onMounted(async () => {
+  chats.value = await getChats()
+})
 
 defineProps<{
   selectedId: number
