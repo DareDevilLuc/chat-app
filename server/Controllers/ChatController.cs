@@ -41,27 +41,4 @@ public class ChatController : ControllerBase {
     return Ok(chats);
 
   }
-  [Authorize]
-  [HttpGet("{chatId}")]
-  public async Task<IActionResult> GetMessages(int chatId) {
-
-
-    int userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-
-    var messages = await _context.Messages
-      .Where(m => m.ChatId == chatId)
-      .Select(m => new MessageDto{
-          Id = m.Id,
-          ChatId = m.ChatId,
-          SenderId = m.SenderId,
-          SenderName = m.Sender.Name,
-          Text = m.Content,
-          CreatedAt = m.CreatedAt,
-          IsOwn = m.SenderId == userId
-          })
-      .ToListAsync();
-
-
-    return Ok();
-  }
 }
