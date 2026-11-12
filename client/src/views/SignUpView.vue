@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 
 const isValid = ref(false)
 const name = ref('')
@@ -52,6 +56,7 @@ const handleSignup = async () => {
 
       error.value = ''
       success.value = 'Succes signup'
+      router.push('/main')
 
     }
     catch {

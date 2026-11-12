@@ -65,10 +65,10 @@ const handleLogin = async () => {
   <v-container class="vh-100 d-flex justify-content-center align-items-center">
     <v-card class="d-flex flex-column elevation-12 pa-4" width="450">
       <v-card-title class="text-h5 text-center font-weight-bold mb-2">
-        Create an Account
+          Login to your Account
       </v-card-title>
       <v-card-subtitle class="text-center mb-4">
-        Sign up to get started
+        Login to get started
       </v-card-subtitle>
 
       <v-card-text>

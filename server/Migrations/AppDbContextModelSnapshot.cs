@@ -360,9 +360,9 @@ namespace server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 2,
+                            Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "seed-user-2",
+                            ConcurrencyStamp = "seed-user-1",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Bryan",
@@ -370,19 +370,6 @@ namespace server.Migrations
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "Bryan"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "seed-user-3",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "Alex",
-                            NormalizedUserName = "ALEX",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Alex"
                         });
                 });
 

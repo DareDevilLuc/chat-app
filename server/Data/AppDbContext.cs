@@ -42,18 +42,10 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<int>, int>
 
         // USERS
     modelBuilder.Entity<User>().HasData(
-        new User { Id = 2, Name = "Bryan", UserName = "Bryan", NormalizedUserName = "BRYAN", 
-        ConcurrencyStamp = "seed-user-2"},
-        new User { Id = 3, Name = "Alex", UserName = "Alex", NormalizedUserName = "ALEX" , 
-        ConcurrencyStamp = "seed-user-3"}
+        new User { Id = 1, Name = "Bryan", UserName = "Bryan", NormalizedUserName = "BRYAN", 
+        ConcurrencyStamp = "seed-user-1"}
     );
 
-        var user = new User
-    {
-        Name = "Bryan",
-        UserName = "Bryan",
-        Email = "bryan@example.com"
-    };
 
 
     // CHATS
