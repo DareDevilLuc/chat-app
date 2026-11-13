@@ -20,8 +20,4 @@ public class ChatHub : Hub {
         );
 
   }
-
-  public async Task SendMessage(){
-    
-  }
 }
