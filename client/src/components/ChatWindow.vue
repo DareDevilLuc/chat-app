@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { nextTick, onMounted, ref, toRef, watch, } from 'vue';
+import { nextTick, onMounted, ref, watch, onUnmounted } from 'vue';
 import MessageInput from './MessageInput.vue';
 import MessageList from './MessageList.vue';
 import { getMessages } from '@/composables/useMessages';
 import type { Message } from '@/types/message';
+import {
+  connection,
+  startConnection,
+  joinChat,
+  leaveChat
+} from '@/services/signalr'
 
 
 const props = defineProps<{
@@ -13,9 +19,36 @@ const props = defineProps<{
 
 const messages = ref<Message[]>([])
 
+function handleReceiveMessage(message: Message) {
+   const currentUserId = localStorage.getItem('userId')
+
+   message.isOwn = message.senderId == Number(currentUserId)
+   messages.value.push(message)
+}
+
 onMounted(async () => {
   messages.value = await getMessages(props.selectedID)
+
+  connection.on('ReceiveMessage', handleReceiveMessage)
+
+  await startConnection()
+
+  await joinChat(props.selectedID)
+
 })
+
+onUnmounted(async () => {
+  connection.off('ReceiveMessage', handleReceiveMessage)
+  await leaveChat(props.selectedID)
+})
+
+watch(
+  () => props.selectedID, async (newId, oldId) => {
+    await leaveChat(oldId)
+    await joinChat(newId)
+    messages.value = await getMessages(newId)
+  }
+)
 
 async function sendNewMessage(text: string) {
   if(text === '') return
@@ -38,10 +71,6 @@ async function sendNewMessage(text: string) {
    if(!response.ok){
     throw new Error('Error sending message')
    }
-
-  const savedMessage = await response.json();
-
-  messages.value.push(savedMessage);
 
   }
   catch{

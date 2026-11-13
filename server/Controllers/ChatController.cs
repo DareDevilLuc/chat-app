@@ -24,7 +24,7 @@ public class ChatController : ControllerBase {
   public async Task<IActionResult> GetChats()
   {
 
-    var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+    var userId = Convert.ToInt32(User.FindFirst("userId")?.Value);
 
 
     var chats = await _context.Chats

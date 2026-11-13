@@ -3,7 +3,25 @@ using Microsoft.AspNetCore.SignalR;
 namespace SignalRChatMVC.Hubs;
 
 public class ChatHub : Hub {
-  public async Task SendMessage(){
 
+  public async Task JoinChat(int chatId){
+
+    await Groups.AddToGroupAsync(
+        Context.ConnectionId,
+        chatId.ToString()
+        );
+  }
+
+  public async Task LeaveChat(int chatId){
+
+    await Groups.RemoveFromGroupAsync(
+        Context.ConnectionId,
+        chatId.ToString()
+        );
+
+  }
+
+  public async Task SendMessage(){
+    
   }
 }

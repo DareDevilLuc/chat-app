@@ -15,8 +15,10 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "@microsoft/signalr": "^11.0.0",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.2",
+    "jwt-decode": "^4.0.0",
     "pinia": "^4.0.3",
     "vue": "^3.5.42",
     "vue-router": "^5.3.1",

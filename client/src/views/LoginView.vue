@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
+import { jwtDecode } from 'jwt-decode'
 
 const router = useRouter()
 
@@ -50,6 +51,9 @@ const handleLogin = async () => {
       error.value = ''
       success.value = 'Success login'
       localStorage.setItem('token', data.token)
+      const decoded = jwtDecode(data.token)
+      console.log(decoded.userId)
+      localStorage.setItem('userId', decoded.userId)
 
       router.push('/main')
 
