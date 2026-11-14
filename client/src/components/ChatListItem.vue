@@ -17,7 +17,7 @@ const emit = defineEmits<{
   <div class="p-0" :class="id === selectedId ? 'bg-primary' : ''" @click="emit('select', {
     id: id,
     name: name
-  })">
+  })" role="button">
     <div class="border-bottom border-2 border-danger p-3 d-flex justify-content-center
       align-items-center">
       <v-avatar image="https://github.com/mdo.png" size="70" class="me-2"/>
