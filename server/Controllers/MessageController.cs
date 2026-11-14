@@ -78,7 +78,6 @@ public class MessageController : ControllerBase
       SenderName = user.Name,
       Text = message.Content,
       CreatedAt = message.CreatedAt,
-      IsOwn = message.SenderId == user.Id 
     };
 
     await _hubContext.Clients
